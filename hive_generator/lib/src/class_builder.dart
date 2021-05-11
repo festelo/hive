@@ -28,6 +28,7 @@ class ClassBuilder extends Builder {
   @override
   String buildRead() {
     var constr = cls.constructors.firstOrNullWhere((it) => it.name.isEmpty);
+
     check(constr != null, 'Provide an unnamed constructor.');
 
     // The remaining fields to initialize.
@@ -51,7 +52,7 @@ class ClassBuilder extends Builder {
     for (var param in constr.parameters) {
       var field = fields.firstOrNullWhere((it) => it.name == param.name);
       // Final fields
-      field ??= getters.firstOrNullWhere((it) => it.name == param.name);
+      field ??= getters.firstOrNullWhere((it) => it.name.replaceAll("_", "") == param.name);
       if (field != null) {
         if (param.isNamed) {
           code.write('${param.name}: ');
@@ -70,14 +71,14 @@ class ClassBuilder extends Builder {
 
     // There may still be fields to initialize that were not in the constructor
     // as initializing formals. We do so using cascades.
-    for (var field in fields) {
-      code.write('..${field.name} = ');
-      code.writeln(_value(
-        field.type,
-        'fields[${field.index}]',
-        field.defaultValue,
-      ));
-    }
+    // for (var field in fields) {
+    //   code.write('..${field.name} = ');
+    //   code.writeln(_value(
+    //     field.type,
+    //     'fields[${field.index}]',
+    //     field.defaultValue,
+    //   ));
+    // }
 
     code.writeln(';');
 

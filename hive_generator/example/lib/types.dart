@@ -2,6 +2,17 @@ import 'package:hive/hive.dart';
 
 part 'types.g.dart';
 
+// Vanilla constructor
+@HiveType(typeId: 0)
+class Vanilla {
+  @HiveField(0)
+  String _name;
+
+  Vanilla(String? name): _name = name ?? "";
+}
+
+
+
 @HiveType(typeId: 1)
 class Class1 {
   const Class1(this.nested, [this.enum1]);
