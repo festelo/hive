@@ -56,8 +56,12 @@ class ClassBuilder extends Builder {
     // There may still be fields to initialize that were not in the constructor
     // as initializing formals. We do so using cascades.
     for (var field in fields) {
-      code.writeln(
-          '..${field.name} = ${_cast(field.type, 'fields[${field.index}]')}');
+      code.write('..${field.name} = ');
+      code.writeln(_value(
+        field.type,
+        'fields[${field.index}]',
+        field.defaultValue,
+      ));
     }
 
     code.writeln(';');
