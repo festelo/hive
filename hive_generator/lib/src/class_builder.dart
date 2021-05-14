@@ -72,7 +72,7 @@ class ClassBuilder extends Builder {
   String _value(DartType type, String variable, DartObject? defaultValue) {
     var value = _cast(type, variable);
     if (defaultValue?.isNull != false) return value;
-    return '$variable == null ? "null" : $value';
+    return '$variable == null ? null : $value';
   }
 
   String _cast(DartType type, String variable) {
