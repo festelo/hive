@@ -34,10 +34,11 @@ class ClassBuilder extends Builder {
     // The remaining fields to initialize.
     var fields = setters.toList();
 
-    // Empty classes
-    if (constr!.parameters.isEmpty && fields.isEmpty) {
-      return 'return ${cls.name}();';
-    }
+    // // Empty classes
+    // if (constr!.parameters.isEmpty && fields.isEmpty) {
+    //   return 'return ${cls.name}();';
+    // }
+    //todo: bug
 
     var code = StringBuffer();
     code.writeln('''
@@ -49,7 +50,7 @@ class ClassBuilder extends Builder {
     return ${cls.name}(
     ''');
 
-    for (var param in constr.parameters) {
+    for (var param in constr!.parameters) {
       var field = fields.firstOrNullWhere((it) => it.name == param.name);
       // Final fields
       field ??= getters.firstOrNullWhere((it) => it.name.replaceAll("_", "") == param.name);
