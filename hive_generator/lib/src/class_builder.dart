@@ -22,6 +22,19 @@ class ClassBuilder extends Builder {
 
   @override
   String buildRead() {
+    var constr = cls.constructors.firstOrNullWhere((it) => it.name.isEmpty);
+
+    check(constr != null, 'Provide an unnamed constructor.');
+
+    // The remaining fields to initialize.
+    var fields = setters.toList();
+
+    // // Empty classes
+    // if (constr!.parameters.isEmpty && fields.isEmpty) {
+    //   return 'return ${cls.name}();';
+    // }
+    //todo: bug
+
     var code = StringBuffer();
     code.writeln('''
     final numOfFields = reader.readByte();
@@ -32,13 +45,7 @@ class ClassBuilder extends Builder {
     return ${cls.name}(
     ''');
 
-    var constr = cls.constructors.firstOrNullWhere((it) => it.name.isEmpty);
-    check(constr != null, 'Provide an unnamed constructor.');
-
-    // The remaining fields to initialize.
-    var fields = setters.toList();
-
-    for (var param in constr.parameters) {
+    for (var param in constr!.parameters!) {
       var field = fields.firstOrNullWhere((it) => it.name == param.name);
       // Final fields
       field ??= getters.firstOrNullWhere((it) => it.name == param.name);
