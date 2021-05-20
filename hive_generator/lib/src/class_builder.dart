@@ -98,7 +98,7 @@ class ClassBuilder extends Builder {
       return '($variable as HiveList$suffix)?.castHiveList()';
     } else if (iterableChecker.isAssignableFromType(type) &&
         !isUint8List(type)) {
-      return '($variable as List$suffix)${_castIterable(type)}';
+      return 'List.from($variable as List)';
     } else if (mapChecker.isAssignableFromType(type)) {
       return '($variable as Map$suffix)${_castMap(type)}';
     } else {
