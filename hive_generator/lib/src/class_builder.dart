@@ -86,6 +86,12 @@ class ClassBuilder extends Builder {
     var suffix = _suffixFromType(type);
     if (hiveListChecker.isAssignableFromType(type)) {
       return '($variable as HiveList$suffix)?.castHiveList()';
+    } else if (setChecker.isAssignableFromType(type)) {
+      if (type.nullabilitySuffix == NullabilitySuffix.question ||
+          type.nullabilitySuffix == NullabilitySuffix.star) {
+        return '$variable == null ? null : Set.from($variable as Set)';
+      }
+      return 'Set.from($variable as Set)';
     } else if (iterableChecker.isAssignableFromType(type) &&
         !isUint8List(type)) {
       return 'List.from($variable as List)';
