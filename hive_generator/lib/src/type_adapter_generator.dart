@@ -33,7 +33,7 @@ class TypeAdapterGenerator extends GeneratorForAnnotation<HiveType> {
     var setters = gettersAndSetters[1];
     verifyFieldIndices(setters);
 
-    var typeId = getTypeId(annotation);
+    var typeId = getTypeId(annotation) ?? cls.name.hashCode;
 
     var adapterName = getAdapterName(cls.name, annotation);
     var builder = cls.isEnum
@@ -160,11 +160,9 @@ class TypeAdapterGenerator extends GeneratorForAnnotation<HiveType> {
     }
   }
 
-  int getTypeId(ConstantReader annotation) {
-    check(
-      !annotation.read('typeId').isNull,
-      'You have to provide a non-null typeId.',
-    );
-    return annotation.read('typeId').intValue;
+  int? getTypeId(ConstantReader annotation) {
+    return annotation.read('typeId').isNull
+        ? null
+        : annotation.read('typeId').intValue;
   }
 }
