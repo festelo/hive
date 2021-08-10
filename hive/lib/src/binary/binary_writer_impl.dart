@@ -302,33 +302,33 @@ class BinaryWriterImpl extends BinaryWriter {
   void write<T>(T value, {bool writeTypeId = true}) {
     if (value == null) {
       if (writeTypeId) {
-        writeByte(FrameValueType.nullT);
+        writeInt(FrameValueType.nullT);
       }
     } else if (value is int) {
       if (writeTypeId) {
-        writeByte(FrameValueType.intT);
+        writeInt(FrameValueType.intT);
       }
       writeInt(value);
     } else if (value is double) {
       if (writeTypeId) {
-        writeByte(FrameValueType.doubleT);
+        writeInt(FrameValueType.doubleT);
       }
       writeDouble(value);
     } else if (value is bool) {
       if (writeTypeId) {
-        writeByte(FrameValueType.boolT);
+        writeInt(FrameValueType.boolT);
       }
       writeBool(value);
     } else if (value is String) {
       if (writeTypeId) {
-        writeByte(FrameValueType.stringT);
+        writeInt(FrameValueType.stringT);
       }
       writeString(value);
     } else if (value is List) {
       _writeList(value, writeTypeId: writeTypeId);
     } else if (value is Map) {
       if (writeTypeId) {
-        writeByte(FrameValueType.mapT);
+        writeInt(FrameValueType.mapT);
       }
       writeMap(value);
     } else {
@@ -338,7 +338,7 @@ class BinaryWriterImpl extends BinaryWriter {
             'Did you forget to register an adapter?');
       }
       if (writeTypeId) {
-        writeByte(resolved.typeId);
+        writeInt(resolved.typeId);
       }
       resolved.adapter.write(this, value);
     }
@@ -349,42 +349,42 @@ class BinaryWriterImpl extends BinaryWriter {
   void _writeList(List value, {bool writeTypeId = true}) {
     if (value is HiveList) {
       if (writeTypeId) {
-        writeByte(FrameValueType.hiveListT);
+        writeInt(FrameValueType.hiveListT);
       }
       writeHiveList(value);
     } else if (value.contains(null)) {
       if (writeTypeId) {
-        writeByte(FrameValueType.listT);
+        writeInt(FrameValueType.listT);
       }
       writeList(value);
     } else if (value is Uint8List) {
       if (writeTypeId) {
-        writeByte(FrameValueType.byteListT);
+        writeInt(FrameValueType.byteListT);
       }
       writeByteList(value);
     } else if (value is List<int>) {
       if (writeTypeId) {
-        writeByte(FrameValueType.intListT);
+        writeInt(FrameValueType.intListT);
       }
       writeIntList(value);
     } else if (value is List<double>) {
       if (writeTypeId) {
-        writeByte(FrameValueType.doubleListT);
+        writeInt(FrameValueType.doubleListT);
       }
       writeDoubleList(value);
     } else if (value is List<bool>) {
       if (writeTypeId) {
-        writeByte(FrameValueType.boolListT);
+        writeInt(FrameValueType.boolListT);
       }
       writeBoolList(value);
     } else if (value is List<String>) {
       if (writeTypeId) {
-        writeByte(FrameValueType.stringListT);
+        writeInt(FrameValueType.stringListT);
       }
       writeStringList(value);
     } else {
       if (writeTypeId) {
-        writeByte(FrameValueType.listT);
+        writeInt(FrameValueType.listT);
       }
       writeList(value);
     }

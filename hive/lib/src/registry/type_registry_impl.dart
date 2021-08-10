@@ -85,10 +85,10 @@ class TypeRegistryImpl implements TypeRegistry {
     }
     var typeId = adapter.typeId;
     if (!internal) {
-      if (typeId < 0 || typeId > 223) {
-        throw HiveError('TypeId $typeId not allowed.');
+      if (typeId < 255 && typeId > 223) {
+        throw HiveError(
+            'TypeId $typeId not allowed. It\'s used for hive internal type');
       }
-      typeId = typeId + reservedTypeIds;
 
       var oldAdapter = findAdapterForTypeId(typeId);
       if (oldAdapter != null) {
