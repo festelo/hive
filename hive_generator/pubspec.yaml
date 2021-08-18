@@ -10,7 +10,8 @@ environment:
 dependencies:
   build: ^2.0.0
   source_gen: ^1.0.0
-  hive: 2.0.0
+  hive: 
+    path: ../hive
   analyzer: ^1.0.0
   source_helper: ^1.1.0
 
