@@ -14,4 +14,7 @@ dependency_overrides:
   hive:
     path: ../
   hive_generator:
-    path: ../../hive_generator
+    git:
+      url: https://github.com/festelo/hive.git
+      ref: generator
+      path: hive_generator
