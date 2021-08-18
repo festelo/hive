@@ -3,6 +3,7 @@ description: Extension for Hive. Automatically generates TypeAdapters to store a
 version: 1.1.0
 homepage: https://github.com/hivedb/hive/tree/master/hive_generator
 documentation: https://docs.hivedb.dev/
+publish_to: none
 
 environment:                                                            
   sdk: ">=2.12.0 <3.0.0"
@@ -10,7 +11,11 @@ environment:
 dependencies:
   build: ^2.0.0
   source_gen: ^1.0.0
-  hive: 2.0.0
+  hive: 
+    git:
+      url: https://github.com/festelo/hive.git
+      ref: hive
+      path: hive
   analyzer: ^1.0.0
   source_helper: ^1.1.0
 

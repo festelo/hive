@@ -8,7 +8,10 @@ dev_dependencies:
 environment:
   sdk: '>=2.12.0-0 <3.0.0'
 dependency_overrides:
-  hive:
-    path: ../../hive
+  hive: 
+    git:
+      url: https://github.com/festelo/hive.git
+      ref: hive
+      path: hive
   hive_generator:
     path: ..
