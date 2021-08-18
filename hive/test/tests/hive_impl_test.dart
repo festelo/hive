@@ -25,6 +25,11 @@ void main() {
       expect(hive.homePath, 'MYPATH');
 
       expect(
+        () => hive.init('OTHERPATH'),
+        throwsHiveError('Instance has already been initialized.'),
+      );
+
+      expect(
         hive.findAdapterForValue(DateTime.now())!.adapter,
         isA<DateTimeWithTimezoneAdapter>(),
       );

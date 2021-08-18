@@ -8,7 +8,7 @@ import 'package:hive/src/util/delegating_list_view_mixin.dart';
 import 'package:meta/meta.dart';
 
 /// Not part of public API
-class HiveListImpl<E extends HiveObjectMixin>
+class HiveListImpl<E extends HiveObject>
     with HiveCollectionMixin<E>, ListMixin<E>, DelegatingListViewMixin<E>
     implements HiveList<E> {
   /// Not part of public API
@@ -159,7 +159,7 @@ class HiveListImpl<E extends HiveObjectMixin>
   }
 
   @override
-  HiveList<T> castHiveList<T extends HiveObjectMixin>() {
+  HiveList<T> castHiveList<T extends HiveObject>() {
     if (_delegate != null) {
       return HiveListImpl(box, objects: _delegate!.cast());
     } else {

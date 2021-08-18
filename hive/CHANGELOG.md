@@ -1,29 +1,3 @@
-# 2.0.4
-
-### Enhancements
-
-- Adds default value support to hive_generator generated class adapters
-
-# 2.0.3
-
-### Fixes
-
-- Fix regression where lists are no longer growable - [#631](https://github.com/hivedb/hive/pull/631)
-
-# 2.0.2
-
-### Fixes
-
-- `HiveObjectMixin` not assigning box to object - [#618](https://github.com/hivedb/hive/issues/618)
-
-# 2.0.1
-
-### Fixes
-
-- `BoxEvent` value is `null` when watching a `LazyBox` - [#592](https://github.com/hivedb/hive/pull/592)
-- Allow calling `.init()` multiple times, instead of throwing error Hive will print warning to console
-- Hive will warn developers when registering adapters for `dynamic` type
-
 # 2.0.0
 
 ### Fixes

@@ -8,7 +8,7 @@ part 'hive_object_internal.dart';
 
 /// Extend `HiveObject` to add useful methods to the objects you want to store
 /// in Hive
-mixin HiveObjectMixin {
+abstract class HiveObject {
   BoxBase? _box;
 
   dynamic _key;
@@ -57,5 +57,3 @@ mixin HiveObjectMixin {
     return false;
   }
 }
-
-abstract class HiveObject with HiveObjectMixin {}

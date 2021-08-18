@@ -9,7 +9,11 @@ extension HiveX on HiveInterface {
     WidgetsFlutterBinding.ensureInitialized();
     if (!kIsWeb) {
       var appDir = await getApplicationDocumentsDirectory();
-      init(path_helper.join(appDir.path, subDir));
+      if (appDir != null) {
+        init(path_helper.join(appDir.path, subDir));
+      } else {
+        NullThrownError();
+      }
     }
   }
 }

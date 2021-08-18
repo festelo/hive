@@ -30,12 +30,12 @@ class LazyBoxImpl<E> extends BoxBaseImpl<E> implements LazyBox<E> {
 
     if (frame != null) {
       var value = await backend.readValue(frame);
-      if (value is HiveObjectMixin) {
+      if (value is HiveObject) {
         value.init(key, this);
       }
       return value as E?;
     } else {
-      if (defaultValue != null && defaultValue is HiveObjectMixin) {
+      if (defaultValue != null && defaultValue is HiveObject) {
         defaultValue.init(key, this);
       }
       return defaultValue;
@@ -63,10 +63,10 @@ class LazyBoxImpl<E> extends BoxBaseImpl<E> implements LazyBox<E> {
     await backend.writeFrames(frames);
 
     for (var frame in frames) {
-      if (frame.value is HiveObjectMixin) {
-        (frame.value as HiveObjectMixin).init(frame.key, this);
+      if (frame.value is HiveObject) {
+        (frame.value as HiveObject).init(frame.key, this);
       }
-      keystore.insert(frame, lazy: true);
+      keystore.insert(frame.toLazy());
     }
 
     await performCompactionIfNeeded();
